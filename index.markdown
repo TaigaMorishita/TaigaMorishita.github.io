@@ -7,12 +7,12 @@ carousels:
     - image: /assets/img/stm32_2.jpg
     - image: /assets/img/stm32_3.png
     - image: /assets/img/stm32_4.jpg
+    - image: /assets/img/stm32_5.jpg
 
   - images: 
     - image: /assets/img/wsg1.jpg
     - image: /assets/img/wsg2.png
     - image: /assets/img/wsg3.jpg
-    - image: /assets/img/staytuned.jpg
 
   - images: 
     - image: /assets/img/oven1.jpg
@@ -28,7 +28,7 @@ carousels:
 
   - images: 
     - image: /assets/img/logintracker1.png
-    - image: /assets/img/logintracker2.jpg
+    - image: /assets/img/logintracker2.png
     - image: /assets/img/logintracker3.png
     - image: /assets/img/logintracker4.png
 
@@ -37,9 +37,31 @@ carousels:
     - image: /assets/img/keyence2.jpg
     - image: /assets/img/keyence3.png
     - image: /assets/img/keyence4.png
+
+  - images: 
+    - image: /assets/img/jordanpranks1.png
+
+  - images: 
+    - image: /assets/img/pican1.png
+    - image: /assets/img/pican2.jpg
+    - image: /assets/img/pican3.png
+    - image: /assets/img/pican4.png
+
+  - images: 
+    - image: /assets/img/nachi1.png
+    - image: /assets/img/nachi2.jpg
+    - image: /assets/img/nachi3.png
+    - image: /assets/img/nachi4.png
 ---
 
 <style>
+    .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
     /* Define Color Palette from _config.yml */
     :root {
         --purdue-black: {{ site.colors.purdue-black }};
@@ -250,9 +272,9 @@ h2 {
         <div class="hero-content">
             <img src="assets/img/headshot.jpg" alt="Headshot" class="profile-pic">
             <h2>Hi, I'm Taiga Morishita</h2>
-            <h3>Engineering Technology Student | Purdue University</h3>
+            <h3><b>Engineering Technology Student | Purdue University</b></h3>
             <p>
-                TODO
+                I am a Sophomore studying Automation and Systems Integration at Purdue University. My interests include aerospace, electronics (with a focus on microcontrollers), and technical theatre. I prioritize relentless optimization, efficiency, and process improvements, but even more importantly the ability to communicate and work in a team.
             </p>
             <a href="assets/Taiga Morishita Resume.pdf" class="btn" download>Download Resume (PDF)</a>
         </div>
@@ -267,9 +289,9 @@ h2 {
         <div class="skills-list">
             <ul>
                 <li><b>Design:</b> Onshape, SOLIDWORKS, Altium Designer, KiCad</li>
-                <li><b>Certifications:</b> CISCO Certified Network Associate, AWS Cloud Pracitioner</li>
-                <li><b>Data Analytics:</b> Python, MATLAB, Dash</li>
-                <li><b>Programming:</b> PlatformIO, Bash, Embedded C++</li>
+                <li><b>Data Analytics:</b> MATLAB, Dash, Pandas, Parquet</li>
+                <li><b>Programming:</b> PlatformIO, Python, Ladder Logic, Structured Text, Bash, Embedded C++</li>
+                <li><b>Certifications:</b> CISCO Certified Network Associate, AWS Certified Cloud Practitioner</li>
             </ul>
         </div>
     </div>
@@ -283,25 +305,26 @@ h2 {
     <div class="project-grid">
 
       <div class="project-item">
-          <img src="assets/img/SIA-logo.png" alt="SIA Logo">
-          <h3>Subaru of Indiana Automotive Internship</h3>
-          <p>Interned at Subaru of Indiana Automotive as a Manufacturing Engineering intern from June 2025
-              to August 2025.
-              TODO</p>
+          <img src="assets/img/sia.jpg" alt="SIA Logo">
+          <h3>Subaru of Indiana Automotive Intern - MfE Body</h3>
+          <p>Interned at Subaru of Indiana Automotive as a Manufacturing Engineering intern - Body Section from June 2025
+              to August 2025. 
+              Implemented an upgrade to a Keyence Laser Profiler system, using a Mitsubishi Q-Series PLC to communicate between the measurement system and upstream data logging servers.
+              Additionally reprogrammed over 100 Nachi robots to allow for certain checks to be bypassed during dry runs.</p>
       </div>
 
       <div class="project-item">
           <img src="assets/img/PBR.jpg" alt="Purdue Baja DAQ">
           <h3>Purdue Baja DAQ Member</h3>
           <p>Member of Purdue Baja Racing since September 2024. As part of the Baja SAE competition, we
-              design, manufacture, test, and compete with a clean-sheet off-road vehicle every year.</p>
+              design, manufacture, test, and compete with a clean-sheet off-road vehicle every year. Data Acquisition (DAQ) designs and implements a wide variety of sensor data collection and analysis systems.</p>
           <a href="https://www.purduebajaracing.com/" target="_blank">Learn More</a>
       </div>
 
       <div class="project-item">
-          <img src="assets/img/nrg948.jpg" alt="NRG 948">
-          <h3>NRG 948</h3>
-          <p>TODO</p>
+          <img src="assets/img/komo.jpg" alt="NRG 948">
+          <h3>VP of Systems Engineering | Newport Robotics Group - FRC Team 948</h3>
+          <p>In the <a href="https://www.firstinspires.org/programs/frc/" target="_blank">FIRST Robotics Competition (FRC)</a>, students design, build, program, test, and compete with a clean-sheet robot in just 8 weeks. Systems Engineering is a 20+ student subteam that creates a robust, impact-resistant electrical system carrying hundreds of amps of current.</p>
       </div>
 
     </div>
@@ -317,7 +340,7 @@ h2 {
     <div class="project-row">
         <div class="project-text">
             <h3>Custom STM32 Sensor Board Development</h3>
-            <p>Developed a custom STM32-based sensor TODO: finish</p>
+            <p>Developed a custom STM32F303K8U6-based sensor interface board, with UART, SWD, CAN, I2C, 8 MHz crystal, and analog support. Verified operation with an ESP32 as a CAN target, and created best practices for designing and programming custom PCB around bare ICs. Initial tests were done using a hand-soldered LQFP-32 STM32 on a breakout board, with crystals and supporting circuitry added onto separate boards. These tests allowed for a fully functional sensor board on the first board revision.</p>
         </div>
         <div style="flex: 1;">
             {% include carousel.html height="50" unit="%" duration="20" number="1" %}
@@ -327,10 +350,35 @@ h2 {
     <div class="project-row">
         <div class="project-text">
             <h3>Wireless Strain Gage</h3>
-            <p>WSG TODO</p>
+            <p>Designed and implemented a lightweight, fully wireless, torsional strain measurement system for Baja SAE vehicle axles. Worked closely with Drivetrain subsystem members to establish requirements and designed both the PCB and enclosure around axle dimensions.
+            Used best practices form Omega and Vishay to design a performant strain gage processor in Altium, with high-precision, high-data-rate components and multiple auxiliary sensors. Data is send both wirelessly and saved to a local flash memory chip.
+            </p>
         </div>
         <div style="flex: 1;">
             {% include carousel.html height="50" unit="%" duration="20" number="2" %}
+        </div>
+    </div>
+
+    <!-- <div class="project-row">
+        <div class="project-text">
+            <h3>Tippy Cup</h3>
+            <p>TODO
+            <a href="https://example.com" target="_blank">See Design Notes Here!</a>
+            </p>
+        </div>
+        <div style="flex: 1;">
+            {% include carousel.html height="50" unit="%" duration="20" number="4" %}
+        </div>
+    </div> -->
+
+    <div class="project-row">
+        <div class="project-text">
+            <h3>Attendance Tracking System</h3>
+            <p>Created a Login/Logout system for FRC Team 948, connected to a Google Sheets. Programmed GUI made using Python and Tkinter, with API connections to a complex Google Sheet using AppsScript for additional processing. Strong emphasis placed on ease of use and customizability for team leaders. The system also privately sends emails to members upon request, allowing members to see their own attendance history.</p>
+            <a href="https://github.com/faletto/LoginTracker" target="_blank">See Code Here!</a>
+        </div>
+        <div style="flex: 1;">
+            {% include carousel.html height="50" unit="%" duration="20" number="5" %}
         </div>
     </div>
 
@@ -347,32 +395,41 @@ h2 {
 
     <!-- <div class="project-row">
         <div class="project-text">
-            <h3>Tippy Cup</h3>
-            <p>TODO/p>
-        </div>
-        <div style="flex: 1;">
-            {% include carousel.html height="50" unit="%" duration="20" number="4" %}
-        </div>
-    </div> -->
-
-    <!-- <div class="project-row">
-        <div class="project-text">
-            <h3>Attendance Tracking System</h3>
-            <p>Programmed a Login/Logout app for FRC Team 948, connected to a Google Sheets. GUI made using Tkinter, with API connections to a complex Google Sheet with AppsScript to handle additional processing. Strong emphasis on easy of use and customizability.</p>
-            <a href="hhttps://github.com/faletto/LoginTracker" target="_blank">See Code Here!</a>
-        </div>
-        <div style="flex: 1;">
-            {% include carousel.html height="50" unit="%" duration="20" number="5" %}
-        </div>
-    </div> -->
-
-    <!-- <div class="project-row">
-        <div class="project-text">
             <h3>Keyence Laser Profiler Upgrade</h3>
-            <p>LJ-X8000E</p>
+            <p>LJ-X8000E, GOT2000, Q-Series PLC. PLC-Link (an Ethernet-based protocol sometimes used in Japanese industrial controls)</p>
         </div>
         <div style="flex: 1;">
             {% include carousel.html height="50" unit="%" duration="20" number="6" %}
+        </div>
+    </div> -->
+
+        <!-- <div class="project-row">
+        <div class="project-text">
+            <h3>Jordanian Pranks</h3>
+            <p>TODO</p>
+        </div>
+        <div style="flex: 1;">
+            {% include carousel.html height="50" unit="%" duration="20" number="7" %}
+        </div>
+    </div> -->
+
+            <!-- <div class="project-row">
+        <div class="project-text">
+            <h3>Raspberry Pi CAN</h3>
+            <p>TODO</p>
+        </div>
+        <div style="flex: 1;">
+            {% include carousel.html height="50" unit="%" duration="20" number="8" %}
+        </div>
+    </div> -->
+
+                <!-- <div class="project-row">
+        <div class="project-text">
+            <h3>Nachi Robot Reprogramming</h3>
+            <p>TODO</p>
+        </div>
+        <div style="flex: 1;">
+            {% include carousel.html height="50" unit="%" duration="20" number="9" %}
         </div>
     </div> -->
 
