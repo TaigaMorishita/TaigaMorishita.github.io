@@ -3,11 +3,11 @@ layout: page
 
 carousels:
   - images: 
+    - image: /assets/img/stm32_4.jpg
+    - image: /assets/img/stm32_5.jpg
     - image: /assets/img/stm32_1.jpg
     - image: /assets/img/stm32_2.jpg
     - image: /assets/img/stm32_3.png
-    - image: /assets/img/stm32_4.jpg
-    - image: /assets/img/stm32_5.jpg
 
   - images: 
     - image: /assets/img/wsg1.jpg
@@ -340,7 +340,7 @@ h2 {
     <div class="project-row">
         <div class="project-text">
             <h3>Custom STM32 Sensor Board Development</h3>
-            <p>Developed a custom STM32F303K8U6-based sensor interface board, with UART, SWD, CAN, I2C, 8 MHz crystal, and analog support. Verified operation with an ESP32 as a CAN target, and created best practices for designing and programming custom PCB around bare ICs. Initial tests were done using a hand-soldered LQFP-32 STM32 on a breakout board, with crystals and supporting circuitry added onto separate boards. These tests allowed for a fully functional sensor board on the first board revision.</p>
+            <p>Developed a custom STM32F303K8U6-based sensor interface board, with UART, SWD, CAN, I2C, 8 MHz crystal, and analog support. Verified operation with an ESP32 as a CAN target, and created best practices for designing and programming custom PCB around bare ICs. Initial tests were done using a hand-soldered LQFP-32 STM32 on a breakout board, with a timing crystal and supporting circuitry added onto separate boards. These tests allowed for a fully functional sensor board on the first board revision.</p>
         </div>
         <div style="flex: 1;">
             {% include carousel.html height="50" unit="%" duration="20" number="1" %}
@@ -403,7 +403,7 @@ h2 {
         </div>
     </div> -->
 
-        <!-- <div class="project-row">
+    <!-- <div class="project-row">
         <div class="project-text">
             <h3>Jordanian Pranks</h3>
             <p>TODO</p>
@@ -413,7 +413,7 @@ h2 {
         </div>
     </div> -->
 
-            <!-- <div class="project-row">
+    <!-- <div class="project-row">
         <div class="project-text">
             <h3>Raspberry Pi CAN</h3>
             <p>TODO</p>
@@ -423,7 +423,7 @@ h2 {
         </div>
     </div> -->
 
-                <!-- <div class="project-row">
+    <!-- <div class="project-row">
         <div class="project-text">
             <h3>Nachi Robot Reprogramming</h3>
             <p>TODO</p>

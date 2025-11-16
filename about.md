@@ -3,6 +3,9 @@ layout: page
 title: About
 permalink: /about
 ---
+
+<!-- Eventually, I want to move what's in index.markdown here instead. But for now, index.markdown is my portfolio. -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +14,6 @@ permalink: /about
     </script>
 </head>
 <body>
-    <p>Redirecting to <a href="/#about">Skills section</a>...</p>
+    <p>Redirecting to <a href="/#about">About section</a>...</p>
 </body>
 </html>
