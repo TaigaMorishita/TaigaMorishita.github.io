@@ -61,7 +61,8 @@ carousels:
     z-index: 1000;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    }
+
     /* Define Color Palette from _config.yml */
     :root {
         --purdue-black: {{ site.colors.purdue-black }};
@@ -73,11 +74,12 @@ carousels:
         --white: {{ site.colors.white }};
     }
 
-h2 {
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-}
+    h2 {
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
     /* Global Reset and Typography */
     body {
         font-family: Arial, sans-serif;
@@ -196,75 +198,75 @@ h2 {
         margin-top: 10px;
     }
 
-  .project-row {
-      display: flex;
-      background-color: white;
-      /* Keep content item white */
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      margin-bottom: 40px;
-      padding: 20px;
-      text-align: left;
-      align-items: center;
-      gap: 30px;
-  }
+    .project-row {
+        display: flex;
+        background-color: white;
+        /* Keep content item white */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+        padding: 20px;
+        text-align: left;
+        align-items: center;
+        gap: 30px;
+    }
 
-  .project-text {
-      flex: 1;
-      padding: 20px;
-  }
+    .project-text {
+        flex: 1;
+        padding: 20px;
+    }
 
-  .project-text h3 {
-      border-bottom: 2px solid var(--purdue-gold);
-      padding-bottom: 5px;
-      margin-bottom: 15px;
-  }
+    .project-text h3 {
+        border-bottom: 2px solid var(--purdue-gold);
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
 
-          /* Skills Section (Kept white by default) */
-        .skills-list ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            text-align: left;
-        }
+    /* Skills Section (Kept white by default) */
+    .skills-list ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        text-align: left;
+    }
 
-        .skills-list li {
-            background-color: white;
-            border-left: 5px solid var(--purdue-gold);
-            padding: 15px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            flex: 1 1 45%;
-            min-width: 300px;
-        }
+    .skills-list li {
+        background-color: white;
+        border-left: 5px solid var(--purdue-gold);
+        padding: 15px 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        flex: 1 1 45%;
+        min-width: 300px;
+    }
 
-        .project-row {
-            display: flex;
-            background-color: white;
-            /* Keep content item white */
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            margin-bottom: 40px;
-            padding: 20px;
-            text-align: left;
-            align-items: center;
-            gap: 30px;
-        }
+    .project-row {
+        display: flex;
+        background-color: white;
+        /* Keep content item white */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+        padding: 20px;
+        text-align: left;
+        align-items: center;
+        gap: 30px;
+    }
 
-        .project-text {
-            flex: 1;
-            padding: 20px;
-        }
+    .project-text {
+        flex: 1;
+        padding: 20px;
+    }
 
-        hr {
-    border: 0;
-    height: 2px;
-    background-color: var(--purdue-gold);
-}
+    hr {
+        border: 0;
+        height: 2px;
+        background-color: var(--purdue-gold);
+    }
 </style>
 
 <section id="about" class="hero">
@@ -288,7 +290,7 @@ h2 {
         <h2> Skills & Tools</h2>
         <div class="skills-list">
             <ul>
-                <li><b>Design:</b> Onshape, SOLIDWORKS, Altium Designer, KiCad</li>
+                <li><b>Design:</b> Onshape, Altium Designer, KiCad, SOLIDWORKS, NX</li>
                 <li><b>Data Analytics:</b> MATLAB, Dash, Pandas, Parquet</li>
                 <li><b>Programming:</b> PlatformIO, Python, Ladder Logic, Structured Text, Bash, Embedded C++</li>
                 <li><b>Certifications:</b> CISCO Certified Network Associate, AWS Certified Cloud Practitioner</li>
@@ -315,7 +317,7 @@ h2 {
 
       <div class="project-item">
           <img src="assets/img/PBR.jpg" alt="Purdue Baja DAQ">
-          <h3>Purdue Baja DAQ Member</h3>
+          <h3>DAQ Member | Purdue Baja Racing</h3>
           <p>Member of Purdue Baja Racing since September 2024. As part of the Baja SAE competition, we
               design, manufacture, test, and compete with a clean-sheet off-road vehicle every year. Data Acquisition (DAQ) designs and implements a wide variety of sensor data collection and analysis systems.</p>
           <a href="https://www.purduebajaracing.com/" target="_blank">Learn More</a>
@@ -324,7 +326,7 @@ h2 {
       <div class="project-item">
           <img src="assets/img/komo.jpg" alt="NRG 948">
           <h3>VP of Systems Engineering | Newport Robotics Group - FRC Team 948</h3>
-          <p>In the <a href="https://www.firstinspires.org/programs/frc/" target="_blank">FIRST Robotics Competition (FRC)</a>, students design, build, program, test, and compete with a clean-sheet robot in just 8 weeks. Systems Engineering is a 20+ student subteam that creates a robust, impact-resistant electrical system carrying hundreds of amps of current.</p>
+          <p>In the <a href="https://www.firstinspires.org/programs/frc/" target="_blank">FIRST Robotics Competition (FRC)</a>, high school students design, build, program, test, and compete with a clean-sheet robot in just 8 weeks. Systems Engineering is a 20+ student subteam that creates a robust, impact-resistant electrical system carrying hundreds of amps of current.</p>
       </div>
 
     </div>
