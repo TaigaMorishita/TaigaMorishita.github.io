@@ -33,13 +33,13 @@ carousels:
     - image: /assets/img/logintracker4.png
 
   - images: 
+    - image: /assets/img/dyno1.png
+
+  - images: 
     - image: /assets/img/keyence1.png
     - image: /assets/img/keyence2.jpg
     - image: /assets/img/keyence3.png
     - image: /assets/img/keyence4.png
-
-  - images: 
-    - image: /assets/img/jordanpranks1.png
 
   - images: 
     - image: /assets/img/pican1.png
@@ -273,10 +273,10 @@ carousels:
     <div class="container">
         <div class="hero-content">
             <img src="assets/img/headshot.jpg" alt="Headshot" class="profile-pic">
-            <h2>Hi, I'm Taiga Morishita</h2>
-            <h3><b>Engineering Technology Student | Purdue University</b></h3>
+            <h2>Hi! I'm Taiga Morishita</h2>
+            <h3><b>Engineering Student | Purdue University</b></h3>
             <p>
-                I am a Sophomore studying Automation and Systems Integration at Purdue University. My interests include aerospace, electronics (with a focus on microcontrollers), and technical theatre. I prioritize relentless optimization, efficiency, and process improvements, but even more importantly the ability to communicate and work in a team.
+                I am a Sophomore studying Engineering at Purdue University. I started in Robotics Engineering Technology, part of the Polytechnic Institute, before realizing that Engineering, and specifically Mechanical Engineering, is a better fit for me. My interests include robotics (as one might expect), aerospace, electronics (with a focus on microcontrollers), and technical theatre. I love optimization, efficiency, and improvement, but even more importantly the ability to communicate and work in a team.
             </p>
             <a href="assets/Taiga Morishita Resume.pdf" class="btn" download>Download Resume (PDF)</a>
         </div>
@@ -291,7 +291,7 @@ carousels:
         <div class="skills-list">
             <ul>
                 <li><b>Design:</b> Onshape, Altium Designer, KiCad, SOLIDWORKS, NX</li>
-                <li><b>Data Analytics:</b> MATLAB, Dash, Pandas, Parquet</li>
+                <li><b>Data Analytics:</b> MATLAB, Dash, Pandas/PyArrow</li>
                 <li><b>Programming:</b> PlatformIO, Python, Ladder Logic, Structured Text, Bash, Embedded C++</li>
                 <li><b>Certifications:</b> CISCO Certified Network Associate, AWS Certified Cloud Practitioner</li>
             </ul>
@@ -311,8 +311,8 @@ carousels:
           <h3>Subaru of Indiana Automotive Intern - MfE Body</h3>
           <p>Interned at Subaru of Indiana Automotive as a Manufacturing Engineering intern - Body Section from June 2025
               to August 2025. 
-              Implemented an upgrade to a Keyence Laser Profiler system, using a Mitsubishi Q-Series PLC to communicate between the measurement system and upstream data logging servers.
-              Additionally reprogrammed over 100 Nachi robots to allow for certain checks to be bypassed during dry runs.</p>
+              Implemented an upgrade to a Keyence Laser Profiler system, using a Mitsubishi Q-Series PLC to communicate thousands of cars' worth of data between the measurement system and upstream data logging servers.
+              Also reprogrammed over 100 Nachi robots to allow for certain checks to be bypassed during dry runs.</p>
       </div>
 
       <div class="project-item">
@@ -397,8 +397,8 @@ carousels:
 
     <!-- <div class="project-row">
         <div class="project-text">
-            <h3>Keyence Laser Profiler Upgrade</h3>
-            <p>LJ-X8000E, GOT2000, Q-Series PLC. PLC-Link (an Ethernet-based protocol sometimes used in Japanese industrial controls)</p>
+            <h3>CVT/Engine Dynamometer</h3>
+            <p>Baja SAE needed an engine/CVT dyno. My role in this project was for </p>
         </div>
         <div style="flex: 1;">
             {% include carousel.html height="50" unit="%" duration="20" number="6" %}
@@ -407,8 +407,8 @@ carousels:
 
     <!-- <div class="project-row">
         <div class="project-text">
-            <h3>Jordanian Pranks</h3>
-            <p>TODO</p>
+            <h3>Keyence Laser Profiler Upgrade</h3>
+            <p>LJ-X8000E, GOT2000, Q-Series PLC. PLC-Link (an Ethernet-based protocol sometimes used in Japanese industrial controls)</p>
         </div>
         <div style="flex: 1;">
             {% include carousel.html height="50" unit="%" duration="20" number="7" %}

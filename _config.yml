@@ -21,7 +21,7 @@
 title: Taiga Morishita
 email: tmorishi@purdue.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  Sophomore in Purdue's Polytechnic Institute, with a wide range of interests within Engineering Technology
+  Sophomore in Purdue's College of Engineering, with a wide range of interests
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  TaigaMorishita
