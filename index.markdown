@@ -317,7 +317,7 @@ carousels:
 
       <div class="project-item">
           <img src="assets/img/PBR.jpg" alt="Purdue Baja DAQ">
-          <h3>DAQ Member | Purdue Baja Racing</h3>
+          <h3>Incoming DAQ Lead | Purdue Baja Racing</h3>
           <p>Member of Purdue Baja Racing since September 2024. As part of the Baja SAE competition, we
               design, manufacture, test, and compete with a clean-sheet off-road vehicle every year. Data Acquisition (DAQ) designs and implements a wide variety of sensor data collection and analysis systems.</p>
           <a href="https://www.purduebajaracing.com/" target="_blank">Learn More</a>
