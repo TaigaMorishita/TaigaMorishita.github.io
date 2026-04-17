@@ -21,10 +21,10 @@
 title: Taiga Morishita
 email: tmorishi@purdue.edu
 description: >- # this means to ignore newlines until "baseurl:"
-  Sophomore in Purdue's College of Engineering, with a wide range of interests
+  Boiler Up!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  TaigaMorishita
+github_username: TaigaMorishita
 linkedin_username: Taiga-Morishita
 
 # Build settings
@@ -33,18 +33,18 @@ plugins:
   - jekyll-feed
 
 header_pages:
-  - about.md
-  - skills.html
-  - experience.html
   - projects.html
+  - experience.html
+  - skills.html
+
 
 colors:
   purdue-black: "#000000"
   purdue-gold: "#C09139"
   purdue-gold-dark: "#a37930"
+  purdue-gold-light: "#d4a856"
   light-bg: "#f8f8f8"
   text-color: "#333333"
-  carousel-bg: "#efefef"
   white: "#ffffff"
 
 # Exclude from processing.

@@ -1,0 +1,573 @@
+/* ============================================
+   TAIGA MORISHITA PORTFOLIO - CUSTOM STYLES
+   ============================================ */
+
+/* ========== CSS VARIABLES ========== */
+:root {
+    --purdue-black: #000000;
+    --purdue-gold: #C09139;
+    --purdue-gold-dark: #a37930;
+    --purdue-gold-light: #d4a856;
+    --light-bg: #f8f8f8;
+    --text-color: #333333;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== GLOBAL RESET & TYPOGRAPHY ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Garamond', serif;
+    line-height: 1.7;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+a {
+    color: var(--purdue-gold);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--purdue-gold-dark);
+}
+
+/* Animated underline effect */
+.link-underline {
+    position: relative;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--purdue-gold);
+    transition: width var(--transition-base);
+}
+
+.link-underline:hover::after {
+    width: 100%;
+}
+
+/* ========== LAYOUT ========== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.container-wide {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+section {
+    position: relative;
+    padding: 80px 0;
+}
+
+/* Sticky Header */
+.site-header {
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.site-header .wrapper {
+    max-width: 99%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.site-footer .wrapper {
+    max-width: 99%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ========== PARALLAX EFFECTS ========== */
+.parallax-container {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 100px);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(192, 145, 57, 0.4));
+    z-index: 0;
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 1;
+    color: var(--white);
+    text-align: center;
+    padding-top: 150px;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+    min-height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(248, 248, 248, 0.9)), url('../img/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-content {
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+.profile-pic {
+    max-width: 20%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 4px solid var(--purdue-gold);
+}
+
+.about-me {
+    display: flex;
+    align-items: center;
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--purdue-gold), var(--purdue-gold-light));
+    color: var(--purdue-black);
+    padding: 14px 32px;
+    margin: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left var(--transition-base);
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ========== CARDS & GRID ========== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 40px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--purdue-gold), var(--purdue-gold-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.card:hover .card-image {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 24px;
+}
+
+.card-title {
+    margin-bottom: 12px;
+    color: var(--purdue-black);
+}
+
+.card-text {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* ========== IMAGE GALLERY ========== */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 40px 0;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.15);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: var(--white);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+}
+
+/* ========== PROJECT ROWS ========== */
+.project-row {
+    display: flex;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 60px;
+    overflow: hidden;
+    transition: box-shadow var(--transition-base);
+}
+
+.project-row:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.project-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.project-text {
+    flex: 1;
+    padding: 40px;
+}
+
+.project-visual {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.project-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========== SKILLS LIST ========== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.skill-item {
+    background: var(--white);
+    border-left: 5px solid var(--purdue-gold);
+    padding: 24px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.skill-item:hover {
+    border-left-width: 8px;
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+.skill-item strong {
+    color: var(--purdue-gold-dark);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* ========== SECTION DIVIDERS ========== */
+.section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--purdue-gold), transparent);
+    margin: 60px 0;
+    border: none;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Stagger animation for card grids */
+.card:nth-child(1) {
+    animation: fadeInUp 0.6s ease-out 0.1s backwards;
+}
+
+.card:nth-child(2) {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+.card:nth-child(3) {
+    animation: fadeInUp 0.6s ease-out 0.3s backwards;
+}
+
+.card:nth-child(4) {
+    animation: fadeInUp 0.6s ease-out 0.4s backwards;
+}
+
+.card:nth-child(5) {
+    animation: fadeInUp 0.6s ease-out 0.5s backwards;
+}
+
+.card:nth-child(6) {
+    animation: fadeInUp 0.6s ease-out 0.6s backwards;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        width: 95%;
+        padding: 20px 0;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    .project-row {
+        flex-direction: column !important;
+    }
+
+    .project-text,
+    .project-visual {
+        padding: 24px;
+    }
+
+    .profile-pic {
+        width: 200px;
+        height: 200px;
+    }
+
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+
+    .hero {
+        background-attachment: scroll;
+    }
+}
+
+/* ========== UTILITY CLASSES ========== */
+.text-center {
+    text-align: center;
+}
+
+.text-gold {
+    color: var(--purdue-gold);
+}
+
+.bg-white {
+    background-color: var(--white);
+}
+
+.bg-light {
+    background-color: var(--light-bg);
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+.py-4 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}

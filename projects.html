@@ -1,16 +1,451 @@
 ---
-layout: none
+layout: page
 title: Projects
 permalink: /projects-detail/
 ---
-<!DOCTYPE html>
-<html>
-<head>
-    <script>
-        window.location.replace("/#projects-detail");
-    </script>
-</head>
-<body>
-    <p>Redirecting to <a href="/#projects-detail">Projects section</a>...</p>
-</body>
-</html>
+
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<style>
+    .projects-hero {
+        height: 450px;
+        background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .projects-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+            radial-gradient(circle, rgba(192, 145, 57, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: grid-shift 20s linear infinite;
+    }
+
+    @keyframes grid-shift {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        100% {
+            transform: translate(50px, 50px);
+        }
+    }
+
+    .projects-hero h1 {
+        font-size: 4rem;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .projects-hero p {
+        font-size: 1.3rem;
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .project-showcase {
+        margin-bottom: 100px;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+    }
+
+    .project-showcase:nth-child(even) .project-layout {
+        flex-direction: row-reverse;
+    }
+
+    .project-layout {
+        display: flex;
+        min-height: 500px;
+    }
+
+    .project-images {
+        flex: 1;
+        position: relative;
+        background: #f5f5f5;
+        overflow: hidden;
+    }
+
+    .project-main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-slow);
+    }
+
+    .project-showcase:hover .project-main-image {
+        transform: scale(1.05);
+    }
+
+    .image-gallery-preview {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+
+    .gallery-thumb {
+        flex: 1;
+        height: 60px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 4px;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: all var(--transition-base);
+        opacity: 0.7;
+    }
+
+    .gallery-thumb:hover {
+        opacity: 1;
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .project-details {
+        flex: 1;
+        padding: 48px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .project-tag {
+        display: inline-block;
+        background: var(--purdue-gold);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 16px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 16px;
+    }
+
+    .project-title {
+        font-size: 2.2rem;
+        color: var(--purdue-black);
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .project-description {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--text-color);
+        margin-bottom: 24px;
+    }
+
+    .project-highlights {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0;
+    }
+
+    .project-highlights li {
+        padding: 10px 0;
+        padding-left: 28px;
+        position: relative;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .project-highlights li:last-child {
+        border-bottom: none;
+    }
+
+    .project-highlights li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--purdue-gold);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .tech-stack {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .tech-stack h4 {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--purdue-gold-dark);
+        margin-bottom: 12px;
+    }
+
+    .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tech-badge {
+        background: #f5f5f5;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        font-weight: 500;
+    }
+
+    .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 24px;
+        color: var(--purdue-gold);
+        font-weight: 600;
+        transition: all var(--transition-base);
+    }
+
+    .project-link:hover {
+        gap: 12px;
+        color: var(--purdue-gold-dark);
+    }
+
+    @media (max-width: 968px) {
+
+        .project-layout,
+        .project-showcase:nth-child(even) .project-layout {
+            flex-direction: column !important;
+        }
+
+        .project-images {
+            min-height: 350px;
+        }
+
+        .project-details {
+            padding: 32px;
+        }
+
+        .projects-hero h1 {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<div class="projects-hero">
+    <div>
+        <h1>Featured Projects</h1>
+        <p>A portfolio of technical projects showcasing design, development, and problem-solving capabilities</p>
+    </div>
+</div>
+
+<section class="bg-light" style="padding: 80px 0;">
+    <div class="container-wide">
+
+        <!-- STM32 Sensor Board -->
+        <div class="project-showcase">
+            <div class="project-layout">
+                <div class="project-images">
+                    <img src="../assets/img/stm32_4.jpg" alt="STM32 Sensor Board" class="project-main-image">
+                    <div class="image-gallery-preview">
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/stm32_1.jpg');"
+                            title="Prototype testing"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/stm32_2.jpg');"
+                            title="Schematic design"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/stm32_3.png');"
+                            title="PCB layout"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/stm32_5.jpg');"
+                            title="Final assembly"></div>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <span class="project-tag">Hardware Design</span>
+                    <h2 class="project-title">Custom STM32 Sensor Interface Board</h2>
+                    <p class="project-description">
+                        Developed a custom PCB around the STM32F303K8U6 microcontroller with comprehensive peripheral
+                        support and communication interfaces. First board revision achieved full functionality through
+                        rigorous prototyping methodology.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>Multi-protocol support: UART, SWD, CAN, I2C with analog capabilities</li>
+                        <li>8 MHz crystal oscillator for precise timing</li>
+                        <li>ESP32 CAN bus verification and testing</li>
+                        <li>Hand-soldered LQFP-32 prototype on breakout board</li>
+                        <li>Documented best practices for bare IC design</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <h4>Technologies Used</h4>
+                        <div class="tech-badges">
+                            <span class="tech-badge">STM32 HAL</span>
+                            <span class="tech-badge">Altium Designer</span>
+                            <span class="tech-badge">CAN Protocol</span>
+                            <span class="tech-badge">Embedded C</span>
+                            <span class="tech-badge">Oscilloscope Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireless Strain Gage -->
+        <div class="project-showcase">
+            <div class="project-layout">
+                <div class="project-images">
+                    <img src="../assets/img/wsg1.jpg" alt="Wireless Strain Gage" class="project-main-image">
+                    <div class="image-gallery-preview">
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/wsg2.png');"
+                            title="PCB design"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/wsg3.jpg');"
+                            title="Enclosure"></div>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <span class="project-tag">Baja Racing</span>
+                    <h2 class="project-title">Wireless Torsional Strain Measurement System</h2>
+                    <p class="project-description">
+                        Designed lightweight, fully wireless strain measurement system for Baja SAE vehicle axles.
+                        Collaborative design with Drivetrain subsystem ensured perfect integration with existing vehicle
+                        architecture.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>High-precision strain gage signal processing</li>
+                        <li>Wireless data transmission with local flash backup</li>
+                        <li>Multiple auxiliary sensors for comprehensive data</li>
+                        <li>Custom enclosure designed around axle dimensions</li>
+                        <li>Followed Omega and Vishay best practices</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <h4>Technologies Used</h4>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Altium Designer</span>
+                            <span class="tech-badge">Strain Gage Theory</span>
+                            <span class="tech-badge">Wireless Comm</span>
+                            <span class="tech-badge">Flash Memory</span>
+                            <span class="tech-badge">Onshape CAD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PCB Reflow Oven -->
+        <div class="project-showcase">
+            <div class="project-layout">
+                <div class="project-images">
+                    <img src="../assets/img/oven1.jpg" alt="PCB Reflow Oven" class="project-main-image">
+                    <div class="image-gallery-preview">
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/oven2.jpg');"
+                            title="Internal view"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/oven3.jpg');"
+                            title="Control panel"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/oven4.jpg');"
+                            title="Temperature profile"></div>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <span class="project-tag">Lab Equipment</span>
+                    <h2 class="project-title">PCB Reflow Oven Conversion</h2>
+                    <p class="project-description">
+                        Modified used toaster oven into precision PCB reflow oven for soldering SMD components. Enables
+                        in-house assembly of complex circuit boards for Purdue Baja Racing team.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>RP2040 microcontroller with PlatformIO firmware</li>
+                        <li>Thermocouple-based temperature monitoring</li>
+                        <li>Solid State Relay for heating control</li>
+                        <li>LCD display for real-time feedback</li>
+                        <li>Programmable temperature profiles</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <h4>Technologies Used</h4>
+                        <div class="tech-badges">
+                            <span class="tech-badge">RP2040</span>
+                            <span class="tech-badge">PlatformIO</span>
+                            <span class="tech-badge">PID Control</span>
+                            <span class="tech-badge">Thermocouple</span>
+                            <span class="tech-badge">SSR</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/PurdueBajaRacing/Reflow-Oven/tree/main" target="_blank"
+                        class="project-link">
+                        View Code & Documentation →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Tracker -->
+        <div class="project-showcase">
+            <div class="project-layout">
+                <div class="project-images">
+                    <img src="../assets/img/logintracker1.png" alt="Attendance Tracking System"
+                        class="project-main-image">
+                    <div class="image-gallery-preview">
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/logintracker2.png');"
+                            title="Login interface"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/logintracker3.png');"
+                            title="Admin panel"></div>
+                        <div class="gallery-thumb" style="background-image: url('../assets/img/logintracker4.png');"
+                            title="Email reports"></div>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <span class="project-tag">Software</span>
+                    <h2 class="project-title">FRC Team Attendance Tracking System</h2>
+                    <p class="project-description">
+                        Created comprehensive login/logout system for FRC Team 948 with Google Sheets integration.
+                        Prioritized user experience and customization for team leaders while maintaining data privacy.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>Python GUI using Tkinter framework</li>
+                        <li>Google Sheets API with AppsScript processing</li>
+                        <li>Automated email reports for members</li>
+                        <li>Customizable interface for team administrators</li>
+                        <li>Privacy-focused individual attendance history</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <h4>Technologies Used</h4>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Tkinter</span>
+                            <span class="tech-badge">Google Sheets API</span>
+                            <span class="tech-badge">AppsScript</span>
+                            <span class="tech-badge">Email Automation</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/faletto/LoginTracker" target="_blank" class="project-link">
+                        View on GitHub →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="bg-white py-4">
+    <div class="container text-center">
+        <h2 class="mb-4">More Projects Coming Soon</h2>
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">
+            I'm constantly working on new projects and expanding my skillset. Check back regularly for updates, or reach
+            out to discuss potential collaborations.
+        </p>
+        <a href="{{ '/#contact' | relative_url }}" class="btn">Get In Touch</a>
+        <a href="{{ '/skills/' | relative_url }}" class="btn">View Skills</a>
+        <a href="{{ '/experience/' | relative_url }}" class="btn">View Experience</a>
+    </div>
+</section>
