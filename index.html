@@ -1,0 +1,276 @@
+---
+layout: page
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="text-gold">Taiga Morishita</h1>
+            <h3>Engineering Student | Purdue University</h3>
+            <a href="assets/Taiga Morishita Resume.pdf" class="btn" download>My Resume</a>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="featured">
+    <div class="container">
+        <h2 class="text-center mb-4">Highlights</h2>
+
+        <div class="card-grid">
+            <div class="card">
+                <div style="overflow: hidden;">
+                    <img src="assets/img/sia.jpg" alt="SIA Internship" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Manufacturing Engineering Intern</h3>
+                    <p class="card-text">Subaru of Indiana Automotive - Summer 2025</p>
+                    <p class="card-text">Upgraded Keyence Laser Profiler systems to interface with Mitsubishi Q-Series
+                        PLCs and upstream servers and reprogrammed over 100 Nachi robots.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="overflow: hidden;">
+                    <img src="assets/img/PBR.jpg" alt="Purdue Baja Racing" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Incoming Data Acquisition Lead</h3>
+                    <p class="card-text">Purdue Baja Racing - Since Sept 2024</p>
+                    <p class="card-text">Design, build, and program vehicle data collection and sensor systems to
+                        support the design and testing of a student-built competitive off-road vehicle.</p>
+                    <a href="https://www.purduebajaracing.com" target="_blank" class="link-underline">More About Purdue
+                        Baja</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="overflow: hidden;">
+                    <img src="assets/img/stm32_4.jpg" alt="Custom PCB" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Custom STM32 Sensor Board</h3>
+                    <p class="card-text">Purdue Baja Racing/Personal Project</p>
+                    <p class="card-text">Developed a custom STM32-based PCB from bare ICs. Included SMT soldering, SWD
+                        programming, and bi-directional CAN communication, along with other peripherals.</p>
+                    <a href="{{ '/experience/' | relative_url }}" class="link-underline">View Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <hr class="section-divider"> <!--Put this inside the div to make the jump links look nice-->
+
+    <div class="container">
+        <h2 class="text-center mb-4">Technical Skills</h2>
+
+        <div class="skills-grid">
+            <div class="skill-item">
+                <strong>Design & CAD</strong>
+                Onshape, Altium Designer, KiCad, SOLIDWORKS, NX
+            </div>
+
+            <div class="skill-item">
+                <strong>Data Analytics</strong>
+                MATLAB, Dash, Pandas/PyArrow
+            </div>
+
+            <div class="skill-item">
+                <strong>Programming</strong>
+                PlatformIO, Python, Ladder Logic, Structured Text, Bash, Embedded C++
+            </div>
+
+            <div class="skill-item">
+                <strong>Certifications</strong>
+                CISCO Certified Network Associate, AWS Certified Cloud Practitioner
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience">
+    <hr class="section-divider"> <!--Put this inside the div to make the jump links look nice-->
+
+    <div class="container">
+        <h2 class="text-center mb-4">Projects</h2>
+
+        <div class="projects-grid">
+            <div class="project-photo js-clickable-card">
+                <a href="assets/img/stm32_4.jpg" class="glightbox card-lightbox-trigger" data-gallery="stm32-gallery"
+                    data-title="Assembled Custom STM32 Sensor Board"
+                    data-description="First assembled sensor board, fully in-house. Worked first try! :D"
+                    style="display:none;"></a>
+
+                <img src="assets/img/stm32_4.jpg" alt="Custom STM32 Sensor Board" class="project-image">
+                <div class="project-overlay">
+                    <div class="project-content">
+                        <h3 class="project-title">Custom STM32 Sensor Board</h3>
+                        <div class="project-hidden-text">
+                            <p>Developed a custom STM32F303K8T6-based sensor interface board with CAN, I2C, UART, SWD,
+                                and analog support. Created best practices for designing and programming custom PCB
+                                around bare ICs. Hand-soldered SMT components for testing, and configured proceses for
+                                in-house manufacturing.
+                                <br><br> <strong>Click to see more photos!</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-photo js-clickable-card">
+                <a href="assets/img/oven1.jpg" class="glightbox card-lightbox-trigger"
+                    data-gallery="reflow-oven-gallery" data-title="Oven (Dis)assembly"
+                    data-description="Disassembling a used toaster oven as the base." style="display:none;"></a>
+
+                <img src="assets/img/oven1.jpg" alt="Custom STM32 Sensor Board" class="project-image">
+                <div class="project-overlay">
+                    <div class="project-content">
+                        <h3 class="project-title">PCB Reflow Oven</h3>
+                        <div class="project-hidden-text">
+                            <p>
+                                Assisted in modifying a used toaster oven for PCB reflow to solder small SMD components
+                                for Purdue Baja Racing. Programmed an RP2040 using PlatformIO to read a Thermocouple and
+                                control a Solid State Relay, displaying information on a LCD screen.
+                                <br><br>
+                            <form action="https://github.com/PurdueBajaRacing/Reflow-Oven" target="_blank"
+                                class="inline-link-form">
+                                <button type="submit">Code &amp; Design Notes Here!</button>
+                            </form>
+                            <br><br><strong>Click to see more photos!</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-photo js-clickable-card">
+                <a href="assets/img/logintracker5.png" class="glightbox card-lightbox-trigger"
+                    data-gallery="login-tracker-gallery" data-title="Installed Kiosk"
+                    data-description="It runs on both Windows and Linux, and the upstream data storage was designed to handle multiple computers at once"
+                    style="display:none;"></a>
+
+                <img src="assets/img/logintracker1.png" alt="Image of a login kiosk UI" class="project-image">
+                <div class="project-overlay">
+                    <div class="project-content">
+                        <h3 class="project-title">Attendance Tracking System</h3>
+                        <div class="project-hidden-text">
+                            <p>Created a Login/Logout system for FRC Team 948. Created
+                                GUI using Python-Tkinter, with API connections to a Google Sheet using
+                                AppsScript for processing and viewing. The system also sends emails
+                                upon request, allowing members to privately view their own attendance history.
+                                <br><br>
+                            <form action="https://github.com/faletto/LoginTracker" target="_blank"
+                                class="inline-link-form">
+                                <button type="submit">See Code Here!</button>
+                            </form>
+                            <br><br> <strong>Click to see more photos!</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none;">
+                <a href="assets/img/stm32_1.jpg" class="glightbox" data-gallery="stm32-gallery" data-title="First Tests"
+                    data-description="Initial tests were done with a hand-soldered STM32F303K8 on a breakout board, with a crystal and supporting circuitry added onto separate boards. A ESP32 was used as a CAN target for testing."></a>
+                <a href="assets/img/stm32_3.png" class="glightbox" data-gallery="stm32-gallery"
+                    data-title="Programming the STM32"
+                    data-description="Used STM32CubeProg over SWD for initial testing, eventually moved to UART bootloader programming."></a>
+                <a href="assets/img/stm32_5.jpg" class="glightbox" data-gallery="stm32-gallery"
+                    data-title="Final PCB Close-up"
+                    data-description="Inspecting the solder joints of the assembled board. Penny for scale."></a>
+
+                <a href="assets/img/oven2.jpg" class="glightbox" data-gallery="reflow-oven-gallery"
+                    data-title="Initial TFT Display Testing"
+                    data-description="Testing out a RP2040 and a TFT with a rudimentary profile."></a>
+                <a href="assets/img/oven3.jpg" class="glightbox" data-gallery="reflow-oven-gallery"
+                    data-title="First Tests"
+                    data-description="First test of the oven. While it didn't follow the curve too well, the solder did reflow and it didn't seem like we damaged any components. I later tuned the control algorithm, and we added additional insulation for better performance."></a>
+                <a href="assets/img/oven4.jpg" class="glightbox" data-gallery="reflow-oven-gallery"
+                    data-title="Post-Reflow Inspection"
+                    data-description="Close inspection of a completed board. Note the fully reflowed solder joints."></a>
+
+                <a href="assets/img/logintracker2.png" class="glightbox" data-gallery="login-tracker-gallery"
+                    data-title="Google Sheets Data Viewer"
+                    data-description="What it looks like for a leadership member reviewing attendance. The names of the users are cropped off to the left. There's a lot more customizablilty and special case handling elsewhere in the spreadsheet."></a>
+                <a href="assets/img/logintracker1.png" class="glightbox" data-gallery="login-tracker-gallery"
+                    data-title="Kiosk UI"
+                    data-description="Simple UI, needed no explanation for the most part. The idea was that with a numpad, you could use the keyboard to do actions slightly quicker. With most of our converted kiosks not having numpads, that didn't happen. Was a good lesson on intended vs. actual usage, though."></a>
+                <a href="assets/img/logintracker3.png" class="glightbox" data-gallery="login-tracker-gallery"
+                    data-title="Login/Logout Records"
+                    data-description="The actual logs that are processed by Google Sheets. Note that while the API call logs are timestamped to the minute, all actually recorded time values are rounded to the nearest 10 minutes to make life easier for everyone."></a>
+                <a href="assets/img/logintracker4.png" class="glightbox" data-gallery="login-tracker-gallery"
+                    data-title="Google AppsScript"
+                    data-description="This project was mostly annoying because of the many different systems that had to interact with each other (and optimized for fast processing). Here you can see some of the AppsScript that helps out with many different functions (in this case, it's the Email notification system)."></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="about" class="bg-light">
+    <div class="container">
+        <div class="about-me-container">
+            <div class="profile-wrapper">
+                <img src="assets/img/headshot.jpg" alt="This is me!" class="profile-img">
+            </div>
+
+            <div class="about-text">
+                <h2 class="mb-4">About Me</h2>
+                <p>Hi, I'm Taiga. I'm a Sophomore in Purdue's College of Engineering.</p>
+                <p>I started my journey at Purdue in Robotics Engineering Technology in the Polytechnic Institute, but
+                    soon realized that Mechanical Engineering was a better fit for me.</p>
+                <p>My interests span <strong>robotics</strong> (as one might expect), <strong>aerospace</strong>,
+                    <strong>electronics</strong> (particularly microcontroller development), and <strong>technical
+                        theatre production</strong>. What drives me most is the pursuit of optimization and
+                    efficiency—finding elegant solutions to complex problems.
+                </p>
+                <p>I love optimization, efficiency, and improvement, but even more importantly the ability to
+                    communicate and work in a team.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+    // Initialize standard overlay instances
+    const lightbox = GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: false
+    });
+
+    // Handle container clicks safely, filtering form buttons vs. background lightbox triggers
+    document.querySelectorAll('.js-clickable-card').forEach(card => {
+        card.addEventListener('click', function (e) {
+            if (e.target.closest('.inline-link-form')) {
+                return;
+            }
+            const trigger = card.querySelector('.card-lightbox-trigger');
+            if (trigger) {
+                trigger.click();
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Page-specific layout tweaks */
+    .page-content {
+        padding: 0;
+    }
+
+    .wrapper {
+        max-width: 100%;
+        padding: 0;
+    }
+</style>
