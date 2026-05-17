@@ -117,7 +117,7 @@ section {
     align-items: center;
     justify-content: center;
     padding-top: 80px;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(248, 248, 248, 0.9)), url('../img/banner.jpg');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1)), url('../img/banner.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
