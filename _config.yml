@@ -33,7 +33,6 @@ plugins:
   - jekyll-feed
 
 header_pages:
-  - projects.html
   - experience.html
   - skills.html
 
