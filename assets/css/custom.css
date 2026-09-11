@@ -31,20 +31,35 @@ body {
     line-height: 1.7;
     color: var(--text-color);
     background-color: var(--light-bg);
-    overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Georgia', 'Garamond', serif;
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.2;
 }
 
-h1 { font-size: 5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.75rem; }
-p { margin-bottom: 1.2rem; }
+h1 {
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
 
 a {
     color: var(--purdue-gold);
@@ -97,7 +112,6 @@ section {
     width: 100%;
     z-index: 1000;
     background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-base);
 }
@@ -120,12 +134,10 @@ section {
     background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1)), url('../img/banner.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
 }
 
 .hero-content {
     text-align: center;
-    animation: fadeInUp 1s ease-out;
 }
 
 /* ========== ABOUT ME SPLIT LAYOUT ========== */
@@ -273,7 +285,6 @@ section {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 4 / 5;
     box-shadow: var(--shadow-sm);
     cursor: pointer;
     transition: transform var(--transition-base), box-shadow var(--transition-base);
@@ -309,7 +320,6 @@ section {
     margin: 0 0 4px 0;
     font-size: 1.4rem;
     font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .project-hidden-text {
@@ -398,7 +408,6 @@ section {
 .gslide-description {
     background: var(--purdue-black) !important;
     max-height: 150px;
-    overflow-y: auto;
 }
 
 .gslide-title {
@@ -450,27 +459,74 @@ section {
     border: none;
 }
 
-/* ========== ANIMATIONS ========== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+/* ========== WEB-ONLY ENHANCEMENTS & ANIMATIONS ========== */
+@media screen {
+    body {
+        overflow-x: hidden;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .site-header {
+        backdrop-filter: blur(10px);
+    }
+
+    .hero {
+        background-attachment: fixed;
+    }
+
+    .hero-content {
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .project-title {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-photo {
+        aspect-ratio: 4 / 5;
+    }
+
+    .gslide-description {
+        overflow-y: auto;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card:nth-child(1) {
+        animation: fadeInUp 0.6s ease-out 0.1s backwards;
+    }
+
+    .card:nth-child(2) {
+        animation: fadeInUp 0.6s ease-out 0.2s backwards;
+    }
+
+    .card:nth-child(3) {
+        animation: fadeInUp 0.6s ease-out 0.3s backwards;
     }
 }
 
-.card:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.1s backwards; }
-.card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.2s backwards; }
-.card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.3s backwards; }
+/* ========== RESPONSIVE DESIGN (WEB) ========== */
+@media all and (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
 
-/* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
 
     .container {
         width: 95%;
@@ -489,15 +545,201 @@ section {
         max-width: 250px;
         height: 250px;
     }
-
-    .hero {
-        background-attachment: scroll;
-    }
 }
 
 /* ========== UTILITY CLASSES ========== */
-.text-center { text-align: center; }
-.text-gold { color: var(--purdue-gold); }
-.bg-white { background-color: var(--white); }
-.bg-light { background-color: var(--light-bg); }
-.mb-4 { margin-bottom: 2rem; }
+.text-center {
+    text-align: center;
+}
+
+.text-gold {
+    color: var(--purdue-gold);
+}
+
+.bg-white {
+    background-color: var(--white);
+}
+
+.bg-light {
+    background-color: var(--light-bg);
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+.pdf-header {
+    display: none;
+}
+
+/* ============================================
+   WEASYPRINT / PDF EXPORT SPECIFIC STYLES
+   ============================================ */
+@media print {
+    @page {
+        size: letter landscape;
+        margin-top: 1.8cm;
+        margin-bottom: 1.5cm;
+        margin-left: 1.5cm;
+        margin-right: 1.5cm;
+
+        @top-center {
+            content: "Automatically generated from HTML. Please see https://taigamorishita.github.io for online version.";
+            font-family: 'Georgia', serif;
+            font-size: 10pt;
+            color: #666;
+        }
+
+        @bottom-right {
+            content: counter(page) " / " counter(pages);
+            font-family: 'Georgia', serif;
+            font-size: 9pt;
+            color: #666;
+        }
+    }
+
+    /* TYPOGRAPHY & SPACING SCALING */
+    body {
+        font-size: 10pt !important;
+        line-height: 1.4 !important;
+        background-color: #ffffff !important;
+    }
+
+    h1 {
+        font-size: 2.8rem !important;
+    }
+
+    h2 {
+        font-size: 1.8rem !important;
+    }
+
+    h3 {
+        font-size: 1.3rem !important;
+    }
+
+    /* SECTION FLOW RULES: Keep together, break only if overflow */
+    section {
+        padding: 10px 0 !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        break-before: auto !important;
+    }
+
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    .hero {
+        min-height: auto !important;
+        padding-top: 20px !important;
+        background-image: none !important;
+    }
+
+    /* ABOUT ME FIX (Switch flexbox to explicit grid for PDF) */
+    .about-me-container {
+        display: grid !important;
+        grid-template-columns: 200px 1fr !important;
+        gap: 24px !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        align-items: start !important;
+    }
+
+    .profile-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    .profile-img {
+        width: 100% !important;
+        height: 200px !important;
+        object-fit: cover !important;
+    }
+
+    .about-text {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* GRID FIX: 3 columns for landscape layout */
+    .card-grid,
+    .projects-grid,
+    .skills-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px !important;
+        margin-top: 15px !important;
+    }
+
+    /* TALLER PROJECT CARDS & FIXED HEIGHTS */
+    .project-photo {
+        height: 420px !important;
+    }
+
+    .card-image {
+        height: 180px !important;
+    }
+
+    .card-content,
+    .skill-item {
+        padding: 14px !important;
+    }
+
+    /* SOFTEN OVERLAY GRADIENT FOR PRINT CLEARITY */
+    .project-overlay {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%) !important;
+        padding: 16px !important;
+    }
+
+    .project-title {
+        color: #ffffff !important;
+    }
+
+    /* UN-HIDE HIDDEN PROJECT TEXT EXCLUSIVELY FOR PRINT */
+    .project-hidden-text {
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+    }
+
+    .project-hidden-text p {
+        color: #f0f0f0 !important;
+    }
+
+    /* ITEM-LEVEL BREAK PROTECTION */
+    .card,
+    .project-photo,
+    .skill-item,
+    .about-me-container {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+    }
+
+    .section-divider {
+        margin: 10px 0 !important;
+        break-after: avoid !important;
+    }
+
+    /* HIDE WEB UI ELEMENTS IN PDF */
+    .site-header,
+    .pdf-header,
+    .no-pdf {
+        display: none !important;
+    }
+
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
