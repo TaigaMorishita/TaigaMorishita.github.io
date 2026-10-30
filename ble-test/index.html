@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BLE Bench</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d141b">
+<meta name="description" content="Connect to Bluetooth LE devices, read, write and subscribe to characteristics.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BLE Bench">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+  :root {
+    --bg: #e9eef3;
+    --surface: #f8fafc;
+    --ink: #10202e;
+    --muted: #526577;
+    --line: #c3cfda;
+    --accent: #1f4fd8;
+    --on-accent: #ffffff;
+    --signal: #b97800;
+    --bad: #b3261e;
+    --ok: #1b7a43;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, "SF Pro Text", system-ui, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d141b;
+      --surface: #15202b;
+      --ink: #dce6ee;
+      --muted: #8da0b2;
+      --line: #263646;
+      --accent: #6c93ff;
+      --on-accent: #0d141b;
+      --signal: #e8a317;
+      --bad: #ff8a80;
+      --ok: #6fd69a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d141b; --surface: #15202b; --ink: #dce6ee; --muted: #8da0b2; --line: #263646;
+    --accent: #6c93ff; --on-accent: #0d141b; --signal: #e8a317; --bad: #ff8a80; --ok: #6fd69a;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.45 var(--sans);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  h1 { font-size: 1.6rem; letter-spacing: -0.02em; margin: 0; }
+  .net { font-size: 0.8rem; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  .net span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--muted); }
+  .net span.on::before { background: var(--ok); }
+  .net span.off::before { background: var(--bad); }
+
+  button, input, select {
+    font: inherit; color: inherit;
+  }
+  button {
+    background: var(--accent); color: var(--on-accent);
+    border: 0; border-radius: 8px; padding: 10px 16px; min-height: 44px; cursor: pointer; font-weight: 600;
+  }
+  button.quiet { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+  button.small { min-height: 36px; padding: 6px 12px; font-size: 0.9rem; }
+  button:disabled { opacity: 0.45; cursor: default; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  input, select {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; min-height: 44px; width: 100%;
+  }
+
+  .notice {
+    background: var(--surface); border-left: 4px solid var(--signal); padding: 12px 14px; border-radius: 4px; margin-bottom: 16px;
+  }
+  .notice[hidden] { display: none; }
+
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .panel h2 { font-size: 1rem; margin: 0 0 10px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .row > input { flex: 1 1 200px; }
+  label.field { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+  .hint { color: var(--muted); font-size: 0.85rem; margin: 8px 0 0; }
+
+  .device-name { font-size: 1.2rem; font-weight: 700; }
+  .status { font-size: 0.9rem; color: var(--muted); }
+  .status.live { color: var(--ok); }
+
+  .service { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
+  .service:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+  .service-title { font-weight: 700; }
+  .uuid { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); word-break: break-all; }
+
+  .char { margin: 10px 0 0 12px; padding-left: 12px; border-left: 2px solid var(--line); }
+  .char-title { font-weight: 600; }
+  .props { font-size: 0.8rem; color: var(--muted); margin: 2px 0 8px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .value {
+    font-family: var(--mono); font-size: 0.85rem; background: var(--bg); border-radius: 6px;
+    padding: 8px 10px; margin-top: 8px; word-break: break-all; white-space: pre-wrap;
+  }
+  .value.fresh { outline: 2px solid var(--signal); }
+  .write { display: grid; grid-template-columns: 1fr 96px auto; gap: 8px; margin-top: 8px; }
+  @media (max-width: 480px) { .write { grid-template-columns: 1fr 1fr; } .write input { grid-column: 1 / -1; } }
+
+  #log {
+    font-family: var(--mono); font-size: 0.78rem; max-height: 220px; overflow: auto;
+    background: var(--bg); border-radius: 6px; padding: 8px 10px; margin: 0; white-space: pre-wrap; word-break: break-all;
+  }
+  #log .err { color: var(--bad); }
+  #log .ok { color: var(--ok); }
+  .empty { color: var(--muted); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .value.fresh { transition: outline-color 1s; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>BLE Bench</h1>
+    <div class="net" aria-live="polite">
+      <span id="netState">checking…</span>
+      <span id="swState">offline cache: checking…</span>
+    </div>
+  </header>
+
+  <div id="unsupported" class="notice" hidden>
+    <strong>Web Bluetooth isn’t available in this browser.</strong>
+    On iPhone and iPad, open this page in the <strong>Bluefy</strong> browser. Safari and Chrome on iOS can’t talk to Bluetooth devices from a web page.
+  </div>
+
+  <section class="panel" id="connectPanel">
+    <h2>Connect</h2>
+    <div class="row">
+      <button id="btnScan">Choose a device</button>
+      <button id="btnDisconnect" class="quiet" disabled>Disconnect</button>
+    </div>
+    <div style="margin-top:14px">
+      <label class="field" for="customUuid">Extra service UUIDs to unlock (optional)</label>
+      <input id="customUuid" placeholder="180f, 6e400001-b5a3-f393-e0a9-e50e24dcca9e" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <p class="hint">Web Bluetooth only exposes services you list before connecting. Common services are included already; add custom ones here, separated by commas.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="devicePanel" hidden>
+    <div class="device-name" id="devName">—</div>
+    <div class="status" id="devStatus">Not connected</div>
+    <div class="row" style="margin-top:10px">
+      <button id="btnReconnect" class="small quiet" hidden>Reconnect</button>
+    </div>
+    <div id="services" style="margin-top:14px"></div>
+  </section>
+
+  <section class="panel">
+    <div class="row" style="justify-content:space-between; margin-bottom:8px">
+      <h2 style="margin:0">Log</h2>
+      <button id="btnClear" class="small quiet">Clear</button>
+    </div>
+    <pre id="log" aria-live="polite"></pre>
+  </section>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------- Helpers ----------
+  const $ = (id) => document.getElementById(id);
+  const BASE = "-0000-1000-8000-00805f9b34fb";
+
+  const SERVICE_NAMES = {
+    0x1800: "Generic Access", 0x1801: "Generic Attribute", 0x1802: "Immediate Alert",
+    0x1803: "Link Loss", 0x1804: "Tx Power", 0x1805: "Current Time", 0x180a: "Device Information",
+    0x180d: "Heart Rate", 0x180f: "Battery", 0x1812: "Human Interface Device",
+    0x1816: "Cycling Speed and Cadence", 0x1818: "Cycling Power", 0x181a: "Environmental Sensing",
+    0x1808: "Glucose", 0x1809: "Health Thermometer", 0x1814: "Running Speed and Cadence",
+    0x1826: "Fitness Machine", 0x181c: "User Data", 0x1815: "Automation IO"
+  };
+  const CHAR_NAMES = {
+    0x2a00: "Device Name", 0x2a01: "Appearance", 0x2a19: "Battery Level", 0x2a29: "Manufacturer Name",
+    0x2a24: "Model Number", 0x2a25: "Serial Number", 0x2a26: "Firmware Revision", 0x2a27: "Hardware Revision",
+    0x2a28: "Software Revision", 0x2a37: "Heart Rate Measurement", 0x2a38: "Body Sensor Location",
+    0x2a39: "Heart Rate Control Point", 0x2a6e: "Temperature", 0x2a6f: "Humidity", 0x2a6d: "Pressure",
+    0x2a05: "Service Changed", 0x2a04: "Preferred Connection Parameters"
+  };
+  const NORDIC_UART = {
+    "6e400001-b5a3-f393-e0a9-e50e24dcca9e": "Nordic UART Service",
+    "6e400002-b5a3-f393-e0a9-e50e24dcca9e": "UART RX (write)",
+    "6e400003-b5a3-f393-e0a9-e50e24dcca9e": "UART TX (notify)"
+  };
+
+  const DEFAULT_SERVICES = [
+    ...Object.keys(SERVICE_NAMES).map(Number),
+    "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
+  ];
+
+  function shortId(uuid) {
+    const m = /^0000([0-9a-f]{4})-0000-1000-8000-00805f9b34fb$/i.exec(uuid);
+    return m ? parseInt(m[1], 16) : null;
+  }
+  function nameFor(uuid, table) {
+    const id = shortId(uuid);
+    if (id !== null && table[id]) return table[id];
+    return NORDIC_UART[uuid.toLowerCase()] || null;
+  }
+  function prettyUuid(uuid) {
+    const id = shortId(uuid);
+    return id !== null ? "0x" + id.toString(16).padStart(4, "0") : uuid;
+  }
+  function normalizeUuid(s) {
+    s = s.trim().toLowerCase();
+    if (/^(0x)?[0-9a-f]{4}$/.test(s)) return parseInt(s.replace("0x", ""), 16);
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(s)) return s;
+    return null;
+  }
+
+  function toHex(dv) {
+    return Array.from(new Uint8Array(dv.buffer, dv.byteOffset, dv.byteLength))
+      .map((b) => b.toString(16).padStart(2, "0")).join(" ");
+  }
+  function toText(dv) {
+    const bytes = new Uint8Array(dv.buffer, dv.byteOffset, dv.byteLength);
+    try { return new TextDecoder("utf-8", { fatal: true }).decode(bytes); }
+    catch { return null; }
+  }
+  function describeValue(dv, uuid) {
+    let out = "hex: " + (toHex(dv) || "(empty)");
+    const text = toText(dv);
+    if (text !== null && /^[\x20-\x7e\r\n\t]*$/.test(text) && text.length) out += "\ntext: " + text;
+    if (dv.byteLength === 1) out += "\nuint8: " + dv.getUint8(0);
+    if (shortId(uuid) === 0x2a19 && dv.byteLength === 1) out += "  (" + dv.getUint8(0) + "%)";
+    return out;
+  }
+  function parseHex(s) {
+    const clean = s.replace(/0x/gi, "").replace(/[^0-9a-f]/gi, "");
+    if (!clean.length || clean.length % 2) throw new Error("Hex input needs an even number of digits.");
+    return Uint8Array.from(clean.match(/../g).map((h) => parseInt(h, 16)));
+  }
+
+  function log(msg, cls) {
+    const el = $("log");
+    const line = document.createElement("div");
+    if (cls) line.className = cls;
+    line.textContent = new Date().toLocaleTimeString() + "  " + msg;
+    el.appendChild(line);
+    el.scrollTop = el.scrollHeight;
+  }
+
+  // ---------- Online / offline / service worker status ----------
+  function setNet() {
+    const el = $("netState");
+    el.textContent = navigator.onLine ? "online" : "offline";
+    el.className = navigator.onLine ? "on" : "off";
+  }
+  window.addEventListener("online", setNet);
+  window.addEventListener("offline", setNet);
+  setNet();
+
+  function setSw(text, cls) {
+    const el = $("swState");
+    el.textContent = text;
+    el.className = cls || "";
+  }
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").then(() => navigator.serviceWorker.ready)
+      .then(() => setSw("offline cache: ready", "on"))
+      .catch((e) => { setSw("offline cache: unavailable", "off"); log("Service worker failed: " + e.message, "err"); });
+  } else {
+    setSw("offline cache: unsupported here", "off");
+  }
+
+  // ---------- Bluetooth ----------
+  let device = null;
+  let server = null;
+  const subscribed = new Map(); // characteristic -> handler
+
+  if (!("bluetooth" in navigator)) {
+    $("unsupported").hidden = false;
+    $("btnScan").disabled = true;
+  }
+
+  function setStatus(text, live) {
+    const el = $("devStatus");
+    el.textContent = text;
+    el.className = "status" + (live ? " live" : "");
+  }
+
+  async function chooseDevice() {
+    const extra = $("customUuid").value.split(",").map(normalizeUuid).filter((x) => x !== null);
+    const optionalServices = [...new Set([...DEFAULT_SERVICES, ...extra])];
+    try {
+      log("Opening device chooser…");
+      const picked = await navigator.bluetooth.requestDevice({ acceptAllDevices: true, optionalServices });
+      if (device && device !== picked) detachDevice();
+      device = picked;
+      device.addEventListener("gattserverdisconnected", onDisconnected);
+      $("devicePanel").hidden = false;
+      $("devName").textContent = device.name || "Unnamed device";
+      await connect();
+    } catch (e) {
+      if (e.name === "NotFoundError") log("No device chosen.");
+      else log("Chooser error: " + e.message, "err");
+    }
+  }
+
+  function detachDevice() {
+    try { device.removeEventListener("gattserverdisconnected", onDisconnected); } catch {}
+    if (device.gatt && device.gatt.connected) device.gatt.disconnect();
+    subscribed.clear();
+  }
+
+  async function connect() {
+    if (!device) return;
+    $("btnReconnect").hidden = true;
+    $("services").textContent = "";
+    setStatus("Connecting…");
+    try {
+      server = await device.gatt.connect();
+      setStatus("Connected", true);
+      $("btnDisconnect").disabled = false;
+      log("Connected to " + (device.name || device.id), "ok");
+      await discover();
+    } catch (e) {
+      setStatus("Connection failed");
+      $("btnReconnect").hidden = false;
+      log("Connect error: " + e.message, "err");
+    }
+  }
+
+  function onDisconnected() {
+    subscribed.clear();
+    setStatus("Disconnected");
+    $("btnDisconnect").disabled = true;
+    $("btnReconnect").hidden = false;
+    log("Device disconnected.", "err");
+  }
+
+  async function discover() {
+    const container = $("services");
+    let services = [];
+    try { services = await server.getPrimaryServices(); }
+    catch (e) { log("Service discovery: " + e.message, "err"); }
+    if (!services.length) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "No accessible services. Add the device’s service UUIDs above, then choose the device again.";
+      container.appendChild(p);
+      return;
+    }
+    for (const svc of services) {
+      const box = document.createElement("div");
+      box.className = "service";
+      const title = document.createElement("div");
+      title.className = "service-title";
+      title.textContent = nameFor(svc.uuid, SERVICE_NAMES) || "Custom service";
+      const id = document.createElement("div");
+      id.className = "uuid";
+      id.textContent = prettyUuid(svc.uuid);
+      box.append(title, id);
+      container.appendChild(box);
+
+      let chars = [];
+      try { chars = await svc.getCharacteristics(); }
+      catch (e) { log("Characteristics of " + prettyUuid(svc.uuid) + ": " + e.message, "err"); }
+      for (const ch of chars) box.appendChild(renderChar(ch));
+    }
+    log("Found " + services.length + " service(s).");
+  }
+
+  function renderChar(ch) {
+    const wrap = document.createElement("div");
+    wrap.className = "char";
+    const t = document.createElement("div");
+    t.className = "char-title";
+    t.textContent = nameFor(ch.uuid, CHAR_NAMES) || "Characteristic";
+    const u = document.createElement("div");
+    u.className = "uuid";
+    u.textContent = prettyUuid(ch.uuid);
+    const p = ch.properties;
+    const names = ["read", "write", "writeWithoutResponse", "notify", "indicate"].filter((k) => p[k]);
+    const props = document.createElement("div");
+    props.className = "props";
+    props.textContent = names.join(", ") || "no usable properties";
+    wrap.append(t, u, props);
+
+    const out = document.createElement("div");
+    out.className = "value";
+    out.hidden = true;
+    const show = (dv) => {
+      out.hidden = false;
+      out.textContent = describeValue(dv, ch.uuid);
+      out.classList.add("fresh");
+      setTimeout(() => out.classList.remove("fresh"), 700);
+    };
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    if (p.read) {
+      const b = document.createElement("button");
+      b.className = "small";
+      b.textContent = "Read";
+      b.onclick = async () => {
+        try { show(await ch.readValue()); }
+        catch (e) { log("Read failed: " + e.message, "err"); }
+      };
+      actions.appendChild(b);
+    }
+
+    if (p.notify || p.indicate) {
+      const b = document.createElement("button");
+      b.className = "small quiet";
+      b.textContent = "Subscribe";
+      b.onclick = async () => {
+        try {
+          if (subscribed.has(ch)) {
+            await ch.stopNotifications();
+            ch.removeEventListener("characteristicvaluechanged", subscribed.get(ch));
+            subscribed.delete(ch);
+            b.textContent = "Subscribe";
+            log("Unsubscribed from " + prettyUuid(ch.uuid));
+          } else {
+            const handler = (ev) => {
+              show(ev.target.value);
+              log(prettyUuid(ch.uuid) + " → " + toHex(ev.target.value));
+            };
+            ch.addEventListener("characteristicvaluechanged", handler);
+            await ch.startNotifications();
+            subscribed.set(ch, handler);
+            b.textContent = "Unsubscribe";
+            log("Subscribed to " + prettyUuid(ch.uuid), "ok");
+          }
+        } catch (e) { log("Notify failed: " + e.message, "err"); }
+      };
+      actions.appendChild(b);
+    }
+    if (actions.children.length) wrap.appendChild(actions);
+
+    if (p.write || p.writeWithoutResponse) {
+      const row = document.createElement("div");
+      row.className = "write";
+      const input = document.createElement("input");
+      input.placeholder = "value to send";
+      input.autocomplete = "off";
+      input.autocapitalize = "off";
+      input.spellcheck = false;
+      input.setAttribute("aria-label", "Value to write");
+      const fmt = document.createElement("select");
+      fmt.setAttribute("aria-label", "Value format");
+      for (const f of ["hex", "text"]) {
+        const o = document.createElement("option");
+        o.value = f; o.textContent = f;
+        fmt.appendChild(o);
+      }
+      const send = document.createElement("button");
+      send.className = "small";
+      send.textContent = "Write";
+      send.onclick = async () => {
+        try {
+          const data = fmt.value === "hex" ? parseHex(input.value) : new TextEncoder().encode(input.value);
+          if (p.write && ch.writeValueWithResponse) await ch.writeValueWithResponse(data);
+          else if (p.writeWithoutResponse && ch.writeValueWithoutResponse) await ch.writeValueWithoutResponse(data);
+          else await ch.writeValue(data);
+          log("Wrote " + data.length + " byte(s) to " + prettyUuid(ch.uuid), "ok");
+        } catch (e) { log("Write failed: " + e.message, "err"); }
+      };
+      row.append(input, fmt, send);
+      wrap.appendChild(row);
+    }
+
+    wrap.appendChild(out);
+    return wrap;
+  }
+
+  $("btnScan").addEventListener("click", chooseDevice);
+  $("btnReconnect").addEventListener("click", connect);
+  $("btnDisconnect").addEventListener("click", () => {
+    if (device && device.gatt.connected) device.gatt.disconnect();
+  });
+  $("btnClear").addEventListener("click", () => { $("log").textContent = ""; });
+
+  log("Ready.");
+})();
+</script>
+</body>
+</html>
